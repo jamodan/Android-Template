@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  disclaimer.xml
+  Feed Cost Calculator
+  Created By : Daniel Jamison
+  Date : April 04, 2012
+  Copyright (c) 2012 South Dakota State University. All rights reserved.
+ -->
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content" 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@null"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/space"
+		android:layout_width="fill_parent"
+		android:layout_height="10dp"
+		android:layout_centerHorizontal="true"
+		android:layout_alignParentTop="true"
+		android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+		android:background="@drawable/settings_tab_indicator_background_gap"/>
+    
+	<ScrollView 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content" 
+	    android:layout_centerHorizontal="true"
+	    android:layout_below="@+id/space"
+	    android:layout_gravity="top"
+	    android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+	    android:background="@drawable/settings_tab_indicator_background">
+		<RelativeLayout
+	        
+	        android:id="@+id/relativeLayout1"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        >
+	
+		    <TextView
+		        android:id="@+id/disclaimer"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_centerHorizontal="true"
+		        android:layout_marginLeft="10dp"
+		        android:layout_marginRight="10dp"
+		        android:layout_marginTop="10dp"
+		        android:gravity="top"
+		        android:text="@string/disclaimer"
+		        android:textColor="@color/settings_text" 
+		        android:textColorLink="@color/settings_links"
+		        android:textSize="15sp"/>
+		    
+		    <TextView
+		        android:layout_width="match_parent"
+		        android:layout_height="20dp"
+		        android:layout_centerHorizontal="true"
+		        android:layout_below="@+id/disclaimer"/>
+	    </RelativeLayout>
+	</ScrollView>
+</RelativeLayout>
+

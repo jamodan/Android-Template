@@ -1,0 +1,62 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:background="@null">
+    
+    <RelativeLayout
+        android:id="@+id/top_control_bar"
+        style="@style/TopControlBar">
+
+        <Button
+            android:id="@+id/logo"
+            android:clickable="false"
+            style="@style/LogoButton">
+        </Button>
+        
+        <Button
+            android:id="@+id/info"
+            style="@style/iGrowLogoButton">
+        </Button>
+        
+        <TextView
+            android:id="@+id/windowTitle"
+           style="@style/WindowTitle"
+           android:layout_toLeftOf="@+id/info"
+           android:layout_toRightOf="@+id/logo"
+           android:focusableInTouchMode="true"
+           android:focusable="true"/>
+    </RelativeLayout>
+
+    <ScrollView 
+	    android:id="@+id/scroll"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/top_control_bar">
+			
+        <RelativeLayout
+		    android:id="@+id/data0Stuff"
+		    style="@style/DataRow">
+        	
+            <RelativeLayout
+                android:id="@+id/left0"
+                style="@style/FieldBox"
+                android:layout_toLeftOf="@+id/right0">
+		        <TextView
+		            android:id="@+id/label0"
+		            style="@style/Field"
+		            android:background="#aaa"
+		            android:text="@string/info0"/>
+	        </RelativeLayout>
+			
+	        <RelativeLayout
+	            android:id="@+id/right0"
+	            style="@style/EditableBox" >
+		        <Spinner
+		            android:id="@+id/data0"
+		            style="@style/Editable"/>
+	        </RelativeLayout>
+		</RelativeLayout>
+	</ScrollView>
+
+</RelativeLayout>

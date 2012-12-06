@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <color name="top_control_bar">#2988dd</color>
+    <color name="top_control_bar_text">#000000</color>
+    <color name="fade_background">#80ffffff</color>
+    
+    <color name="button_text">#ffffff</color>
+    
+    <color name="settings_tab_text">#000066</color>
+    <color name="settings_text">#000066</color>
+    <color name="settings_links">#f8ba3b</color>
+    
+    <color name="hint_background">#d0000000</color>
+    
+    <color name="darker_background">#4d000000</color>
+    
+    <color name="green_background">#8d00ff00</color>
+    <color name="red_background">#8dff0000</color>
+    
+    <color name="list_label">#3264b1</color>
+    
+</resources>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  indicator.xml
+  Feed Cost Calculator
+  Created By : Daniel Jamison
+  Date : August 03, 2012
+  Copyright (c) 2012 South Dakota State University. All rights reserved.
+ -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:gravity="center_horizontal">
+		
+	<!-- First Tab indicator -->
+	<RelativeLayout
+		android:id="@+id/first_tab"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentLeft="true"
+		android:layout_marginLeft="15dp"
+		android:clickable="true"
+		android:background="@drawable/settings_tab_indicator_selected">
+		<TextView
+		    android:id="@+id/first_tab_text"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_centerInParent="true"
+			android:textColor="@color/settings_tab_text"
+	        android:textSize="18dp"
+	        android:textStyle="bold"
+			android:text="@string/settings_indicator_title1"/>
+		<TextView
+            android:layout_width="15dp"
+       		android:layout_height="wrap_content"
+       		android:layout_toLeftOf="@+id/first_tab_text"/>
+		<TextView
+            android:layout_width="15dp"
+       		android:layout_height="wrap_content"
+       		android:layout_toRightOf="@+id/first_tab_text"/>
+	</RelativeLayout>
+	
+	<!-- Second Tab indicator -->
+	<RelativeLayout
+		android:id="@+id/second_tab"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_toRightOf="@+id/first_tab"
+		android:clickable="true"
+		android:background="@drawable/settings_tab_indicator_unselected">
+		<TextView
+		    android:id="@+id/second_tab_text"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_centerInParent="true"
+			android:textColor="@color/settings_tab_text"
+	        android:textSize="18dp"
+	        android:textStyle="bold"
+			android:text="@string/settings_indicator_title2"/>
+		<TextView
+            android:layout_width="15dp"
+       		android:layout_height="wrap_content"
+       		android:layout_toLeftOf="@+id/first_tab_text"/>
+		<TextView
+            android:layout_width="15dp"
+       		android:layout_height="wrap_content"
+       		android:layout_toRightOf="@+id/first_tab_text"/>
+	</RelativeLayout>
+	
+	<!-- Third Tab indicator -->
+	<RelativeLayout
+		android:id="@+id/third_tab"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_toRightOf="@+id/second_tab"
+		android:layout_marginRight="15dp"
+		android:clickable="true"
+		android:background="@drawable/settings_tab_indicator_unselected">
+		<TextView
+		    android:id="@+id/third_tab_text"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_centerInParent="true"
+			android:textColor="@color/settings_tab_text"
+	        android:textSize="18dp"
+	        android:textStyle="bold"
+			android:text="@string/settings_indicator_title3"/>
+		<TextView
+            android:layout_width="15dp"
+       		android:layout_height="wrap_content"
+       		android:layout_toLeftOf="@+id/first_tab_text"/>
+		<TextView
+            android:layout_width="15dp"
+       		android:layout_height="wrap_content"
+       		android:layout_toRightOf="@+id/first_tab_text"/>
+	</RelativeLayout>
+</RelativeLayout>

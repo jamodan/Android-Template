@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  button.xml
+  Feed Cost Calculator
+  Created By : Daniel Jamison
+  Date : August 03, 2012
+  Copyright (c) 2012 South Dakota State University. All rights reserved.
+ -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true"
+          android:drawable="@drawable/button_pressed" /> <!-- pressed -->
+    <item android:state_focused="true"
+          android:drawable="@drawable/button_focused" /> <!-- focused -->
+    <item android:drawable="@drawable/button_default" /> <!-- default -->
+</selector>

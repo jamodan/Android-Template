@@ -1,3 +1,7 @@
+/*
+ * Created By : Daniel Jamison
+ * Copyright (c) 2012 South Dakota State University. All rights reserved.
+ */
 package com.example.template;
 
 import android.annotation.SuppressLint;
@@ -16,6 +20,8 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
+	Intent intent;
+	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,17 +31,31 @@ public class MainActivity extends Activity {
     @SuppressLint("NewApi")
 	@Override
     public boolean onCreateOptionsMenu(Menu menu) {
-    	MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main, menu);
-        ImageView iGrowLogo = (ImageView) menu.findItem(R.id.menu_igrow).getActionView();
-        iGrowLogo.setOnClickListener(new OnClickListener(){
-	    	public void onClick(View view){
-	    		// Display additional information for feed analysis values
-	    		Uri uri = Uri.parse( "http://igrow.org" );
-				startActivity( new Intent( Intent.ACTION_VIEW, uri ) );
-	    	}
-	    }
-	    );
+        if (Integer.valueOf(android.os.Build.VERSION.SDK) < 11)
+        {
+        	// Show the disclaimer
+        	intent = new Intent(MainActivity.this,SettingsMainActivity.class);
+        	try {
+        		startActivity(intent);
+        	}
+        	catch (ActivityNotFoundException e){
+        		Toast.makeText(MainActivity.this, "NO Viewer", Toast.LENGTH_SHORT).show();
+        	}
+        }
+        else
+        {
+        	MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.main, menu);
+	        ImageView iGrowLogo = (ImageView) menu.findItem(R.id.menu_igrow).getActionView();
+	        iGrowLogo.setOnClickListener(new OnClickListener(){
+		    	public void onClick(View view){
+		    		// Display additional information for feed analysis values
+		    		Uri uri = Uri.parse( "http://igrow.org" );
+					startActivity( new Intent( Intent.ACTION_VIEW, uri ) );
+		    	}
+		    }
+		    );
+        }
         //inflater.inflate(menuRes, menu)
         return true;
     }

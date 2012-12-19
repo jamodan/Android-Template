@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  Created By : Daniel Jamison
+  Copyright (c) 2012 South Dakota State University. All rights reserved.
+ -->
 <resources>
     
     <color name="top_control_bar">#2988dd</color>

@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  swipe_main.xml
-  Feed Cost Calculator
   Created By : Daniel Jamison
-  Date : August 03, 2012
   Copyright (c) 2012 South Dakota State University. All rights reserved.
  -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -35,7 +32,7 @@
 	        <!--android:text="@string/app_name"-->
 	        <TextView
             style="@style/WindowTitle"
-            android:text="Noxious Weeds of South Dakota"
+            android:text="@string/menu_settings"
             android:layout_toLeftOf="@+id/info"
             android:layout_toRightOf="@+id/logo"/>
 	    </RelativeLayout>

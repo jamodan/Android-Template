@@ -5,6 +5,7 @@
  -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/menu_igrow"
+        android:title="@string/igrow"
         android:orderInCategory="99"
         android:actionLayout="@layout/igrow_icon"
         android:showAsAction="always"/>

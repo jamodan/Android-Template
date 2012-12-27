@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Created By : Daniel Jamison
+  Copyright (c) 2012 South Dakota State University. All rights reserved.
+ -->
+<LinearLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" 
+    android:background="@color/fade_background" >
+    
+    <RelativeLayout
+        android:id="@+id/top_control_bar"
+        style="@style/TopControlBar">
+
+        <Button
+            android:id="@+id/logo"
+            android:clickable="false"
+            style="@style/LogoButton">
+        </Button>
+        
+        <Button
+            android:id="@+id/info"
+            style="@style/iGrowLogoButton">
+        </Button>
+        
+        <TextView
+            android:id="@+id/windowTitle"
+           style="@style/WindowTitle"
+           android:layout_toLeftOf="@+id/info"
+           android:layout_toRightOf="@+id/logo"
+           android:focusableInTouchMode="true"
+           android:focusable="true"/>
+    </RelativeLayout>
+
+	<ScrollView 
+	    android:id="@+id/scroll"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent">
+	
+	    <RelativeLayout
+	        android:id="@+id/relativeLayoutScroll"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content">
+			
+	        <RelativeLayout
+			    android:id="@+id/data1Stuff"
+			    style="@style/DataRow"
+	        	android:layout_alignParentTop="true"
+	        	android:visibility="gone">
+	        	
+	            <RelativeLayout
+	                android:id="@+id/left1"
+	                style="@style/FieldBox"
+	                android:layout_toLeftOf="@+id/right1">
+			        <TextView
+			            android:id="@+id/label1"
+			            style="@style/Field"
+			            android:text="@string/info1"/>
+		        </RelativeLayout>
+				
+		        <RelativeLayout
+		            android:id="@+id/right1"
+		            style="@style/EditableBox" >
+			        <Spinner
+			            android:id="@+id/data1"
+			            style="@style/Editable"/>
+		        </RelativeLayout>
+			</RelativeLayout>
+			
+			<RelativeLayout
+			    android:id="@+id/data2Stuff"
+			    style="@style/DataRow"
+	        	android:layout_below="@+id/data1Stuff"
+	        	android:visibility="gone">
+	        	
+	            <RelativeLayout
+	                android:id="@+id/left2"
+	                style="@style/FieldBox"
+	                android:layout_toLeftOf="@+id/right2">
+			        <TextView
+			            android:id="@+id/label2"
+			            style="@style/Field"
+			            android:text="@string/info2"/>
+		        </RelativeLayout>
+				
+		        <RelativeLayout
+		            android:id="@+id/right2"
+		            style="@style/EditableBox" >
+			        <EditText
+			            android:id="@+id/data2"
+			            style="@style/Editable"/>
+		        </RelativeLayout>
+			</RelativeLayout> 
+	        
+			
+			
+			
+	        <Button
+	            android:id="@+id/buttonDone"
+	            style="@style/MainButton"
+	            android:layout_marginTop="10dp"
+	            android:layout_marginBottom="10dp"
+	            android:layout_centerHorizontal="true"
+	            android:text="@string/done" 
+	            android:layout_below="@+id/data2Stuff"/>
+	        
+	        <TextView
+	            android:layout_width="fill_parent"
+        		android:layout_height="20dp"
+        		android:layout_below="@+id/buttonDone"/>	
+	    </RelativeLayout> 
+	</ScrollView>
+</LinearLayout>
+
+			<!--
+			######## Spinner ########
+	        <RelativeLayout
+			    android:id="@+id/data#Stuff"
+			    style="@style/DataRow"
+	        	android:layout_below="@+id/data#Stuff"
+	        	android:visibility="gone">
+	        	
+	            <RelativeLayout
+	                android:id="@+id/left#"
+	                style="@style/FieldBox"
+	                android:layout_toLeftOf="@+id/right#">
+			        <TextView
+			            android:id="@+id/label#"
+			            style="@style/Field"
+			            android:text="@string/info#"/>
+		        </RelativeLayout>
+				
+		        <RelativeLayout
+		            android:id="@+id/right#"
+		            style="@style/EditableBox" >
+			        <Spinner
+			            android:id="@+id/data#"
+			            style="@style/Editable"/>
+		        </RelativeLayout>
+			</RelativeLayout>
+	        
+	        ######## EditText ########
+	        <RelativeLayout
+			    android:id="@+id/data#Stuff"
+			    style="@style/DataRow"
+	        	android:layout_below="@+id/data#Stuff"
+	        	android:visibility="gone">
+	        	
+	            <RelativeLayout
+	                android:id="@+id/left#"
+	                style="@style/FieldBox"
+	                android:layout_toLeftOf="@+id/right#">
+			        <TextView
+			            android:id="@+id/label#"
+			            style="@style/Field"
+			            android:text="@string/info#"/>
+		        </RelativeLayout>
+				
+		        <RelativeLayout
+		            android:id="@+id/right#"
+		            style="@style/EditableBox" >
+			        <EditText
+			            android:id="@+id/data#"
+			            style="@style/Editable"/>
+		        </RelativeLayout>
+			</RelativeLayout>
+			
+			######## TextView ########
+	        <RelativeLayout
+			    android:id="@+id/data#Stuff"
+			    style="@style/DataRow"
+	        	android:layout_below="@+id/data#Stuff"
+	        	android:visibility="gone">
+	        	
+	            <RelativeLayout
+	                android:id="@+id/left#"
+	                style="@style/FieldBox"
+	                android:layout_toLeftOf="@+id/right#">
+			        <TextView
+			            android:id="@+id/label#"
+			            style="@style/FieldNoneditable"
+			            android:text="@string/info#"/>
+		        </RelativeLayout>
+				
+		        <RelativeLayout
+		            android:id="@+id/right#"
+		            style="@style/EditableBox" >
+			        <TextView
+			            android:id="@+id/data#"
+			            style="@style/Noneditable"/>
+		        </RelativeLayout>
+			</RelativeLayout>
+	        -->

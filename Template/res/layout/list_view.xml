@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Created By : Daniel Jamison
+  Copyright (c) 2012 South Dakota State University. All rights reserved.
+ -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@null"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+	        android:id="@+id/top_control_bar"
+	        style="@style/TopControlBar">
+	
+	        <Button
+	            android:id="@+id/logo"
+	            android:clickable="false"
+	            style="@style/LogoButton">
+	        </Button>
+	        
+	        <Button
+	            android:id="@+id/info"
+	            style="@style/iGrowLogoButton">
+	        </Button>
+	        
+	        <TextView
+	        android:id="@+id/windowTitle"
+            style="@style/WindowTitle"
+            android:layout_toLeftOf="@+id/info"
+            android:layout_toRightOf="@+id/logo"/>
+	    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/bottom_control_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true" >
+
+        <Button
+            android:id="@+id/buttonAdd"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_toLeftOf="@+id/buttonDelete"
+            style="@style/Button"
+            android:text="@string/add" />
+        
+        <Button
+            android:id="@+id/buttonDelete"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            style="@style/Button"
+            android:text="@string/delete" />
+        
+        <Button
+            android:id="@+id/buttonExport"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_toRightOf="@+id/buttonDelete"
+            style="@style/Button"
+        	android:text="@string/export"/>
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_above="@id/bottom_control_bar"
+        android:layout_below="@id/top_control_bar"
+        tools:listitem="@layout/list_item" 
+        android:cacheColorHint="@android:color/transparent">
+
+        <requestFocus />
+    </ListView>
+</RelativeLayout>

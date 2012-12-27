@@ -25,7 +25,7 @@
         </Button>
         
         <TextView
-            android:id="@+id/windowTitle"
+           android:id="@+id/windowTitle"
            style="@style/WindowTitle"
            android:layout_toLeftOf="@+id/info"
            android:layout_toRightOf="@+id/logo"
@@ -51,7 +51,7 @@
 		            android:id="@+id/label0"
 		            style="@style/Field"
 		            android:background="#aaa"
-		            android:text="@string/info0"/>
+		            android:text="@string/info1"/>
 	        </RelativeLayout>
 			
 	        <RelativeLayout

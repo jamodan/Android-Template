@@ -10,6 +10,7 @@
     
     <string name="app_name">Template</string>
     <string name="hello_world">Hello world!</string>
+    <string name="igrow">iGrow</string>
     <string name="menu_settings">Info</string>
     <string name="title_activity_main">Screen Sizes</string>
     
@@ -66,6 +67,7 @@
     <string name="other_apps">See our other apps</string>
     <string name="rate">Rate this app</string>
     
-    <string name="info0">Row 0</string>
+    <string name="info1">Row 1</string>
+    <string name="info2">Row 2</string>
 
 </resources>

@@ -25,7 +25,7 @@
 			android:textColor="@color/settings_tab_text"
 	        android:textSize="18sp"
 	        android:textStyle="bold"
-			android:text="@string/settings_indicator_title1"/>
+			android:text="@string/menu_about"/>
 		<TextView
             android:layout_width="15dp"
        		android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
 			android:textColor="@color/settings_tab_text"
 	        android:textSize="18sp"
 	        android:textStyle="bold"
-			android:text="@string/settings_indicator_title2"/>
+			android:text="@string/menu_disclaimer"/>
 		<TextView
             android:layout_width="15dp"
        		android:layout_height="wrap_content"
@@ -80,7 +80,7 @@
 			android:textColor="@color/settings_tab_text"
 	        android:textSize="18sp"
 	        android:textStyle="bold"
-			android:text="@string/settings_indicator_title3"/>
+			android:text="@string/menu_credits"/>
 		<TextView
             android:layout_width="15dp"
        		android:layout_height="wrap_content"

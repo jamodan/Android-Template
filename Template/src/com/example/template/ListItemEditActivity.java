@@ -19,7 +19,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,20 +26,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.SimpleCursorAdapter;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.template.R.string;
 
-public class ListItemEditActivity extends Activity {
+public class ListItemEditActivity extends ActivityConstants {
 	public static final String KEY_ID = "ID";
 	public int ID = 0;
 	public String accessType = "";
@@ -59,24 +54,21 @@ public class ListItemEditActivity extends Activity {
 	private RelativeLayout row2 = null;
 	private TextView label2 = null;
 	private Object data2 = null;
-	
-	
+	private RelativeLayout row3 = null;
+	private TextView label3 = null;
+	private Object data3 = null;
+	private RelativeLayout row4 = null;
+	private TextView label4 = null;
+	private Object data4 = null;
+		
 	Bundle extras = null;
-	DataBaseObject db = null;
 	private Boolean updateFlag = false;
-	
-	SimpleCursorAdapter spinnerAdapter1 = null;
-
-	private int counter1 = 0;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_item_edit);
-        
-        db  = new DataBaseObject(this);
-        db.open();
         
         windowTitle = (TextView)findViewById(R.id.windowTitle);
         
@@ -97,28 +89,24 @@ public class ListItemEditActivity extends Activity {
          
         accessType = ListViewActivity.accessType;
            
-        if (accessType.equals("Bla1"))
+        if (accessType.equals("Data"))
         {
-        	windowTitle.setText("Bla1");
-        	setupBla1Rows();
+        	windowTitle.setText("Data");
+        	setupDataRows();
         	if(updateFlag)
         	{
-        		Cursor c = db.getFeedstuff(ID);
+        		Cursor c = DatabaseDataTable.get(null, DatabaseDataTable.COLUMN_ID + " = ?", new String[] { "" + ID }, null);
         		if(c != null)
     			{
     				if(c.moveToFirst())
     				{
     					do
     					{
-    						int spinnerValueToSet = c.getInt(c.getColumnIndex("column1"));
-    						if (spinnerValueToSet != 0)
-    						{
-    							((Spinner) data1).setSelection(spinnerValueToSet);
-    							//row#.setVisibility(View.VISIBLE);
-    						}
-    						spinnerAdapter1.notifyDataSetChanged();
-    						
-    						((EditText) data2).setText(c.getString(c.getColumnIndex("column2")));
+    						// Populate view with old data for editing
+    						((EditText) data1).setText(c.getString(c.getColumnIndex(DatabaseDataTable.COLUMN_ID)));
+    						((EditText) data2).setText(c.getString(c.getColumnIndex(DatabaseDataTable.COLUMN_NAME)));
+    						((EditText) data3).setText(c.getString(c.getColumnIndex(DatabaseDataTable.COLUMN_VALUE)));
+    						((EditText) data4).setText(c.getString(c.getColumnIndex(DatabaseDataTable.COLUMN_DESCRIPTION)));
     					}while(c.moveToNext());
     				}
     			}
@@ -130,37 +118,14 @@ public class ListItemEditActivity extends Activity {
         	finish();
         }
         
-        button_logo = (Button)findViewById(R.id.logo);
-        button_logo.setOnClickListener(new OnClickListener(){
-	    	public void onClick(View view){
-	    		// Show the disclaimer
-	    		intent = new Intent(ListItemEditActivity.this,SettingsMainActivity.class);
-	    	
-	    		 try {
-	                    startActivity(intent);
-	                }
-	             catch (ActivityNotFoundException e){
-	                    Toast.makeText(ListItemEditActivity.this, "NO Viewer", Toast.LENGTH_SHORT).show();
-	                }
-	    	}
-	    });
-        
-        button_info = (Button)findViewById(R.id.info);
-        button_info.setOnClickListener(new OnClickListener(){
-	    	public void onClick(View view){
-	    		// Display additional information for feed analysis values
-	    		Uri uri = Uri.parse( "http://igrow.org" );
-				startActivity( new Intent( Intent.ACTION_VIEW, uri ) );
-	    	}
-	    });
         
         button_done = (Button)findViewById(R.id.buttonDone);
         button_done.setOnClickListener(new OnClickListener(){
 	    	public void onClick(View view){
 	    		// Save the feed record and return to the main screen
-	    		if (accessType.equals("Bla1"))
+	    		if (accessType.equals("Data"))
 	            {
-	            	saveBla1();
+	            	saveData();
 	            }
 	            else
 	            {
@@ -239,21 +204,41 @@ public class ListItemEditActivity extends Activity {
     	
 	}*/
 	
-	private void setupBla1Rows()
+	private void setupDataRows()
 	{       
-        // ##### SPINNER FROM DATABASE #####
+		// ##### EDIT TEXT #####
         row1 = (RelativeLayout) findViewById(R.id.data1Stuff);
-		row1.setVisibility(View.VISIBLE);
+        row1.setVisibility(View.VISIBLE);
 		label1 = (TextView) findViewById(R.id.label1);
 		label1.setText(string.info1);
-        data1 = (Spinner) findViewById(R.id.data1);
-        spinnerAdapter1 = new SimpleCursorAdapter(this, android.R.layout.simple_spinner_item, db.getSpinnerChoices(0), new String[] { "choice" }, new int[] { android.R.id.text1 });
-        spinnerAdapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        ((Spinner) data1).setAdapter(spinnerAdapter1);
-        ((Spinner) data1).setPrompt("Choose a Feedstuff");
+    	data1 = (EditText)findViewById(R.id.data1);
+    	((EditText) data1).setInputType(InputType.TYPE_CLASS_TEXT);
+    	((EditText) data1).setOnFocusChangeListener(new OnFocusChangeListener()
+        {
+            public void onFocusChange(View v, boolean hasFocus) 
+            {
+                if (hasFocus==true)
+                {
+                	String temp = ((EditText) data1).getText().toString();
+                	// Check to see if the value in the box is zero, if it is erase the zero so the user can type in a new number
+                    if (temp.compareTo("0")==0 || temp.compareTo("0.")==0 || temp.compareTo("0.0")==0 || temp.compareTo("0.00")==0)
+                    {
+                    	((EditText) data1).setText("");
+                    }
+                }
+            }
+        }); 
+    	// After any character change redo all calculations on the screen
+    	((EditText) data1).addTextChangedListener(new TextWatcher() {
+			public void afterTextChanged(Editable s) {
+				dataCalculations();
+			}
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+			public void onTextChanged(CharSequence s, int start, int before, int count) {}
+		});
         
         // ##### EDIT TEXT #####
-        row2 = (RelativeLayout) findViewById(R.id.data2);
+        row2 = (RelativeLayout) findViewById(R.id.data2Stuff);
         row2.setVisibility(View.VISIBLE);
 		label2 = (TextView) findViewById(R.id.label2);
 		label2.setText(string.info2);
@@ -277,181 +262,103 @@ public class ListItemEditActivity extends Activity {
     	// After any character change redo all calculations on the screen
     	((EditText) data2).addTextChangedListener(new TextWatcher() {
 			public void afterTextChanged(Editable s) {
-				bla1Calculations();
+				dataCalculations();
 			}
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 			public void onTextChanged(CharSequence s, int start, int before, int count) {}
 		});
     	
-    	//#####################################################################   	
-    	((Spinner) data1).setOnItemSelectedListener(new OnItemSelectedListener()
+    	// ##### EDIT TEXT #####
+        row3 = (RelativeLayout) findViewById(R.id.data3Stuff);
+        row3.setVisibility(View.VISIBLE);
+		label3 = (TextView) findViewById(R.id.label3);
+		label3.setText(string.info3);
+    	data3 = (EditText)findViewById(R.id.data3);
+    	((EditText) data3).setInputType(InputType.TYPE_CLASS_TEXT);
+    	((EditText) data3).setOnFocusChangeListener(new OnFocusChangeListener()
         {
-    		public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) 
-			{
-    			Log.v("Clicks", "Spinner 1 clicks: " + ++counter1);
-    			if(!updateFlag || counter1 > 2) // on load spinner may be clicked, counter avoids unwanted opening
-				{
-	    			Cursor c = (Cursor)(((Spinner) data1).getSelectedItem());
-	    			if (pos == 0)
-					{
-	    				// Do Something
-					}
-	    			else
-	    			{
-	    				// Do Something
-					}
-				}
+            public void onFocusChange(View v, boolean hasFocus) 
+            {
+                if (hasFocus==true)
+                {
+                	String temp = ((EditText) data3).getText().toString();
+                	// Check to see if the value in the box is zero, if it is erase the zero so the user can type in a new number
+                    if (temp.compareTo("0")==0 || temp.compareTo("0.")==0 || temp.compareTo("0.0")==0 || temp.compareTo("0.00")==0)
+                    {
+                    	((EditText) data3).setText("");
+                    }
+                }
+            }
+        }); 
+    	// After any character change redo all calculations on the screen
+    	((EditText) data3).addTextChangedListener(new TextWatcher() {
+			public void afterTextChanged(Editable s) {
+				dataCalculations();
 			}
-
-			public void onNothingSelected(AdapterView<?> arg0) 
-			{
-				// TODO Auto-generated method stub
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+			public void onTextChanged(CharSequence s, int start, int before, int count) {}
+		});
+        
+        // ##### EDIT TEXT #####
+        row4 = (RelativeLayout) findViewById(R.id.data4Stuff);
+        row4.setVisibility(View.VISIBLE);
+		label4 = (TextView) findViewById(R.id.label4);
+		label4.setText(string.info4);
+    	data4 = (EditText)findViewById(R.id.data4);
+    	((EditText) data4).setInputType(InputType.TYPE_CLASS_TEXT);
+    	((EditText) data4).setOnFocusChangeListener(new OnFocusChangeListener()
+        {
+            public void onFocusChange(View v, boolean hasFocus) 
+            {
+                if (hasFocus==true)
+                {
+                	String temp = ((EditText) data4).getText().toString();
+                	// Check to see if the value in the box is zero, if it is erase the zero so the user can type in a new number
+                    if (temp.compareTo("0")==0 || temp.compareTo("0.")==0 || temp.compareTo("0.0")==0 || temp.compareTo("0.00")==0)
+                    {
+                    	((EditText) data4).setText("");
+                    }
+                }
+            }
+        }); 
+    	// After any character change redo all calculations on the screen
+    	((EditText) data4).addTextChangedListener(new TextWatcher() {
+			public void afterTextChanged(Editable s) {
+				dataCalculations();
 			}
-        });
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+			public void onTextChanged(CharSequence s, int start, int before, int count) {}
+		});
 	}
 	
-	private void bla1Calculations()
+	private void dataCalculations()
 	{
-		double value1 = 0;
-		double value2 = 0;
-		String value1Str = ((EditText) data1).getText().toString();
-		String value2Str = ((EditText) data2).getText().toString();
 		
-		if (value1Str.length() != 0 && value2Str.length() != 0)
-		{
-			try{
-				value1 = Double.valueOf(value1Str);
-	        }catch(Exception e){
-	        	value1 = 0;
-	        	onCreateDialog("Value1 must be a decimal number.", 1);
-				((EditText) data1).requestFocus();
-				return;
-	        }
-			
-			try{
-				value2 = Double.valueOf(value2Str);
-	        }catch(Exception e){
-	        	value2 = 0;
-	        	onCreateDialog("Value2 must be a number.", 1);
-				((EditText) data2).requestFocus();
-				return;
-	        }
-
-			((TextView) data2).setText(String.format("%.2f", value1 + value2));
-		}
 	}
 	
 	// Save the data to the database
-	public void saveBla1()
+	public void saveData()
 	{
-		if(((Spinner) data1).getSelectedItemPosition() == 0)
-		{
-			onCreateDialog("You must select a Feedstuff type.", 1);
-			((Spinner) data1).requestFocus();
-			return;
-		}
-		
-		Cursor data1Cursor = (Cursor)(((Spinner) data1).getSelectedItem());	
-		String name = data1Cursor.getString(data1Cursor.getColumnIndex("column1"));
-		if (name.equals("Buddy") || name.equals("Pal"))
-		{
-			// do something special
-		}
-		
-		double quantity = 0;
-		try{
-            quantity = Double.valueOf(((EditText) data2).getText().toString());
-        }catch(Exception e){
-        	quantity = 0;
-        	onCreateDialog("Quantity must be a decimal number.", 1);
-			((EditText) data2).requestFocus();
-			return;
-        }
-		if (quantity <= 0)
-		{
-			onCreateDialog("Quantity must greater than zero.", 1);
-			((EditText) data2).requestFocus();
-			return;
-		}
-		
-		String note = ((EditText) data2).getText().toString();
-		
-		
 		if(updateFlag == false)
 		{
-			//db.insertFeedstuff(feedstuffType,feedstuffName,use,quantity,unit,conversion,quality,valuePer,location,note);
+			DatabaseDataTable.insert(
+					((EditText) data2).getText().toString(), 
+					((EditText) data3).getText().toString(),
+					((EditText) data4).getText().toString());
 		}
 		else
 		{
-			//db.updateFeedstuff(ID,feedstuffType,feedstuffName,use,quantity,unit,conversion,quality,valuePer,location,note);
+			DatabaseDataTable.update(
+					((EditText) data2).getText().toString(), 
+					((EditText) data3).getText().toString(),
+					((EditText) data4).getText().toString(),
+					DatabaseDataTable.COLUMN_ID + " = ?",
+					new String[] { "" + ID });
 		}
 		
 		finish();
 		
 	}
-	
-	@SuppressLint("NewApi")
-	@Override
-    public boolean onCreateOptionsMenu(Menu menu)
-	{
-        if (Integer.valueOf(android.os.Build.VERSION.SDK) < 11)
-        {
-        	// Show the disclaimer
-        	intent = new Intent(ListItemEditActivity.this,SettingsMainActivity.class);
-        	try {
-        		startActivity(intent);
-        	}
-        	catch (ActivityNotFoundException e){
-        		Toast.makeText(ListItemEditActivity.this, "NO Viewer", Toast.LENGTH_SHORT).show();
-        	}
-        }
-        else
-        {
-        	MenuInflater inflater = getMenuInflater();
-            inflater.inflate(R.menu.main, menu);
-	        ImageView iGrowLogo = (ImageView) menu.findItem(R.id.menu_igrow).getActionView();
-	        iGrowLogo.setOnClickListener(new OnClickListener(){
-		    	public void onClick(View view){
-		    		// Display additional information for feed analysis values
-		    		Uri uri = Uri.parse( "http://igrow.org" );
-					startActivity( new Intent( Intent.ACTION_VIEW, uri ) );
-		    	}
-		    }
-		    );
-        }
-        //inflater.inflate(menuRes, menu)
-        return true;
-    }
-    
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-    	switch (item.getItemId()) {
-	        case R.id.menu_settings:
-	            Intent intent = new Intent(this, SettingsMainActivity.class);
-	            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	    		 try {
-	                    startActivity(intent);
-	                }
-	             catch (ActivityNotFoundException e){
-	                    Toast.makeText(ListItemEditActivity.this, "NO Viewer", Toast.LENGTH_SHORT).show();
-	                }
-	            return true;
-	        default:
-            return super.onOptionsItemSelected(item);
-    	}
-    }
-    
-
-	// Sets functionality of the hard buttons on the device
-	public boolean onKeyUp(int keyCode, KeyEvent event)
-	{
-        if (keyCode == KeyEvent.KEYCODE_BACK)
-        {
-        	finish();
-        }
-        return true;
-    }
 	
 	// Error messages
 	public Dialog onCreateDialog(String error, int id)

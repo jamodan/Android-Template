@@ -63,7 +63,7 @@
 		        <RelativeLayout
 		            android:id="@+id/right1"
 		            style="@style/EditableBox" >
-			        <Spinner
+			        <EditText
 			            android:id="@+id/data1"
 			            style="@style/Editable"/>
 		        </RelativeLayout>
@@ -93,6 +93,56 @@
 			            style="@style/Editable"/>
 		        </RelativeLayout>
 			</RelativeLayout> 
+			
+			<RelativeLayout
+			    android:id="@+id/data3Stuff"
+			    style="@style/DataRow"
+	        	android:layout_below="@+id/data2Stuff"
+	        	android:visibility="gone">
+	        	
+	            <RelativeLayout
+	                android:id="@+id/left3"
+	                style="@style/FieldBox"
+	                android:layout_toLeftOf="@+id/right3">
+			        <TextView
+			            android:id="@+id/label3"
+			            style="@style/Field"
+			            android:text="@string/info3"/>
+		        </RelativeLayout>
+				
+		        <RelativeLayout
+		            android:id="@+id/right3"
+		            style="@style/EditableBox" >
+			        <EditText
+			            android:id="@+id/data3"
+			            style="@style/Editable"/>
+		        </RelativeLayout>
+			</RelativeLayout> 
+			
+			<RelativeLayout
+			    android:id="@+id/data4Stuff"
+			    style="@style/DataRow"
+	        	android:layout_below="@+id/data3Stuff"
+	        	android:visibility="gone">
+	        	
+	            <RelativeLayout
+	                android:id="@+id/left4"
+	                style="@style/FieldBox"
+	                android:layout_toLeftOf="@+id/right4">
+			        <TextView
+			            android:id="@+id/label4"
+			            style="@style/Field"
+			            android:text="@string/info4"/>
+		        </RelativeLayout>
+				
+		        <RelativeLayout
+		            android:id="@+id/right4"
+		            style="@style/EditableBox" >
+			        <EditText
+			            android:id="@+id/data4"
+			            style="@style/Editable"/>
+		        </RelativeLayout>
+			</RelativeLayout> 
 	        
 			
 			
@@ -104,7 +154,7 @@
 	            android:layout_marginBottom="10dp"
 	            android:layout_centerHorizontal="true"
 	            android:text="@string/done" 
-	            android:layout_below="@+id/data2Stuff"/>
+	            android:layout_below="@+id/data4Stuff"/>
 	        
 	        <TextView
 	            android:layout_width="fill_parent"

@@ -5,18 +5,23 @@
  -->
 <resources>
 
-    <string name="app_version">0.0.2 (Beta)</string>
+    <string name="app_version">0.1.0</string>
     <string name="version">Version:</string>
     
     <string name="app_name">Template</string>
     <string name="hello_world">Hello world!</string>
     <string name="igrow">iGrow</string>
-    <string name="menu_settings">Info</string>
     <string name="title_activity_main">Screen Sizes</string>
     
-    <string name="settings_indicator_title1">Disclaimer</string>
-    <string name="settings_indicator_title2">Credits</string>
-    <string name="settings_indicator_title3">About</string>
+    <string name="menu_item1">Screen 1</string>
+    <string name="menu_item2">Screen 2</string>
+    <string name="menu_about">About</string>
+    <string name="menu_disclaimer">Disclaimer</string>
+    <string name="menu_credits">Credits</string>
+    <string name="menu_rate">Rate this app</string>
+    <string name="menu_other_apps">See our other apps</string>
+    <string name="menu_Options">Options</string>
+    <string name="menu_Help">Help</string>
     
     <string name="disclaimer">The quality of information Feed Inventory provides depends on the quality of the information entered. To improve this information, different production stages might require varied feeding rations.
 
@@ -67,7 +72,11 @@
     <string name="other_apps">See our other apps</string>
     <string name="rate">Rate this app</string>
     
+    <string name="type1">List View</string>
+    
     <string name="info1">Row 1</string>
     <string name="info2">Row 2</string>
+    <string name="info3">Row 3</string>
+    <string name="info4">Row 4</string>
 
 </resources>

@@ -23,13 +23,13 @@ public class SettingsViewPagerAdapter extends FragmentPagerAdapter {
         // Each position is a tab that can be swiped to. So each tab has a different layout
         switch(position){
         case 0:
-            f=SettingsDisclaimerTab.newInstance(_context);
+        	f=SettingsAboutTab.newInstance(_context);
             break;
         case 1:
-            f=SettingsCreditsTab.newInstance(_context);
+            f=SettingsDisclaimerTab.newInstance(_context);
             break;
         case 2:
-            f=SettingsAboutTab.newInstance(_context);
+        	f=SettingsCreditsTab.newInstance(_context);
             break;
         }
         return f;

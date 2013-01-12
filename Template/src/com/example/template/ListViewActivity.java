@@ -24,7 +24,6 @@ import android.database.SQLException;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -43,7 +42,9 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ListViewActivity extends ListActivity{
+public class ListViewActivity extends ActivityConstants{
+	
+	
 	public static final String ACCESS_TYPE = "accessType";
 	public static String accessType = "";
 	SimpleCursorAdapter adapter = null;
@@ -57,7 +58,6 @@ public class ListViewActivity extends ListActivity{
 	private Button button_export=null;
 	private Button button_add=null;
 	private Button button_delete=null;
-	DataBaseObject db = null;
 	int selectedID = 0;
 	Context context = null;
 	
@@ -72,6 +72,7 @@ public class ListViewActivity extends ListActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_view);
         
+        
         windowTitle = (TextView)findViewById(R.id.windowTitle);
         
         extras = getIntent().getExtras();
@@ -82,10 +83,9 @@ public class ListViewActivity extends ListActivity{
         
         listIDS = new ArrayList<Integer>();
         checkmarkedIDS = new ArrayList<Integer>();
- 		db  = new DataBaseObject(this);
  		// Displays the information in the list
- 		lv = getListView();
- 		setupListView();
+        lv = (ListView) findViewById(R.id.list);
+ 		//setupListView();
 
         lv.setTextFilterEnabled(true);
         lv.setFocusable(true);
@@ -94,7 +94,7 @@ public class ListViewActivity extends ListActivity{
 		{
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) 
 			{
-				if (accessType.equals("Bla1"))
+				if (accessType.equals("Data"))
 				{
 					selectedID = listIDS.get(position);
 					  	
@@ -269,15 +269,6 @@ public class ListViewActivity extends ListActivity{
     	startActivity(sendIntent);
     }
     
-    // Sets functionality of the hard buttons on the device
-    public boolean onKeyUp(int keyCode, KeyEvent event) 
-    {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-    		finish();
-        }
-        return true;
-    }
-    
     public void getCheckedItems()
     {
     	checkmarkedIDS.clear();
@@ -318,18 +309,25 @@ public class ListViewActivity extends ListActivity{
     	
     	String[] allColumns = null;
     	String[] dataColumns = null;
-    	int[] layoutIds = null;
-    	
-		db.open();
-				 
+    	int[] layoutIds = null;		 
 		Cursor c = null;
 		
 		try
 		{
-			if (accessType.equals("Bla1"))
+			if (accessType.equals("Options"))
 			{
-				windowTitle.setText("Bla1");
-				c = db.getAll(accessType);
+				windowTitle.setText("Options");
+				c = (Cursor) DatabaseOptionsTable.get(new String[] { DatabaseOptionsTable.COLUMN_ID, DatabaseOptionsTable.COLUMN_OPTION_NAME }, null, null, null);
+				listIDS.clear();
+				checkmarkedIDS.clear();
+				allColumns = new String[] {	"_id", "topLeftLabel", "topLeftData" };
+		    	dataColumns = new String[] {	"topLeftLabel", "topLeftData" };
+		    	layoutIds = new int[] { R.id.leftTopLable, R.id.leftTopData };
+			}
+			else if (accessType.equals("Data"))
+			{
+				windowTitle.setText("Data");
+				c = (Cursor) DatabaseDataTable.get(new String[] { DatabaseDataTable.COLUMN_ID, DatabaseDataTable.COLUMN_NAME, DatabaseDataTable.COLUMN_VALUE, DatabaseDataTable.COLUMN_DESCRIPTION }, null, null, null);
 				listIDS.clear();
 				checkmarkedIDS.clear();
 				allColumns = new String[] {	"_id", "topLeftLabel", "topLeftData", "topRightLabel", "topRightData", "bottomLeftLabel", "bottomLeftData", "bottomRightLabel", "bottomRightData" };
@@ -342,8 +340,6 @@ public class ListViewActivity extends ListActivity{
 			}
 					
 			mCursor = new MatrixCursor(allColumns);
-	    	startManagingCursor(mCursor);
-			
 			if(c != null)
 			{
 				if(c.moveToFirst())
@@ -352,17 +348,24 @@ public class ListViewActivity extends ListActivity{
 					do
 					{
 						listIDS.add(c.getInt(c.getColumnIndex("_id")));
-						if (accessType.equals("Bla1"))
+						if (accessType.equals("Options"))
 						{
 							mCursor.addRow(new Object[] {
-									c.getInt(c.getColumnIndex("_id")), 
-									"Label1", c.getString(c.getColumnIndex("column1")),
-									"Label2", String.format("%.2f", c.getDouble(c.getColumnIndex("column2")))
+									c.getInt(c.getColumnIndex(DatabaseOptionsTable.COLUMN_ID)), 
+									"Label1", c.getString(c.getColumnIndex(DatabaseOptionsTable.COLUMN_OPTION_NAME))
 							});
 							
-							// Create Data for CSV file
-							columnData += c.getString(c.getColumnIndex("column1")) + ","
-									+ String.format("%.2f", c.getDouble(c.getColumnIndex("column2"))) + "\n";
+						}
+						else if (accessType.equals("Data"))
+						{
+							mCursor.addRow(new Object[] {
+									c.getInt(c.getColumnIndex(DatabaseDataTable.COLUMN_ID)), 
+									"Name", c.getString(c.getColumnIndex(DatabaseDataTable.COLUMN_NAME)),
+									"Value", c.getString(c.getColumnIndex(DatabaseDataTable.COLUMN_VALUE)),
+									"Description", c.getString(c.getColumnIndex(DatabaseDataTable.COLUMN_DESCRIPTION)),
+									"ID", c.getString(c.getColumnIndex(DatabaseDataTable.COLUMN_ID))
+							});
+							
 						}
 					}while(c.moveToNext());
 				}	 		
@@ -379,33 +382,37 @@ public class ListViewActivity extends ListActivity{
 				c = null;
 			}
 		}
-		db.close();
 		
-		if (accessType.equals("Bla1"))
+		if (accessType.equals("Options"))
+		{
+			adapter = new SimpleCursorAdapter(this, R.layout.list_item, mCursor, dataColumns, layoutIds);
+		}
+		else if (accessType.equals("Data"))
 		{
 			adapter = new SimpleCursorAdapter(this, R.layout.list_item, mCursor, dataColumns, layoutIds);
 		}
 
-		setListAdapter(adapter);
+		lv.setAdapter(adapter);
 	}
     
     // Delete the checkmarked records
  	public void deleteRecord()
  	{
- 		db.open();
- 	
  		int count = checkmarkedIDS.size();
  		
  		// Step through the checked items and delete them
  		for (int index = 0; index < count; index++) 
  		{
- 			db.deleteItem(accessType, listIDS.get(checkmarkedIDS.get(index)));
+ 			if (accessType.equals("Data"))
+ 			{
+ 				DatabaseDataTable.delete(DatabaseDataTable.COLUMN_ID + " = ?" , new String[] { "" + listIDS.get(checkmarkedIDS.get(index)) });
+ 			}
+ 			//db.deleteItem(accessType, listIDS.get(checkmarkedIDS.get(index)));
  			//Toast.makeText(getBaseContext(), "Delete" + checkmarkedIDS.get(index), Toast.LENGTH_LONG).show();
  		}
  		
  		// Resetup the list
  		setupListView();
- 		db.close();
  	}
     
     // Error messages
@@ -481,56 +488,4 @@ public class ListViewActivity extends ListActivity{
 		super.onResume();
 		setupListView();
 	}
-	
-	@SuppressLint("NewApi")
-	@Override
-    public boolean onCreateOptionsMenu(Menu menu)
-	{
-        if (Integer.valueOf(android.os.Build.VERSION.SDK) < 11)
-        {
-        	// Show the disclaimer
-        	intent = new Intent(ListViewActivity.this,SettingsMainActivity.class);
-        	try {
-        		startActivity(intent);
-        	}
-        	catch (ActivityNotFoundException e){
-        		Toast.makeText(ListViewActivity.this, "NO Viewer", Toast.LENGTH_SHORT).show();
-        	}
-        }
-        else
-        {
-        	MenuInflater inflater = getMenuInflater();
-            inflater.inflate(R.menu.main, menu);
-	        ImageView iGrowLogo = (ImageView) menu.findItem(R.id.menu_igrow).getActionView();
-	        iGrowLogo.setOnClickListener(new OnClickListener(){
-		    	public void onClick(View view){
-		    		// Display additional information for feed analysis values
-		    		Uri uri = Uri.parse( "http://igrow.org" );
-					startActivity( new Intent( Intent.ACTION_VIEW, uri ) );
-		    	}
-		    }
-		    );
-        }
-        //inflater.inflate(menuRes, menu)
-        return true;
-    }
-    
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) 
-    {
-    	switch (item.getItemId()) {
-	        case R.id.menu_settings:
-	            Intent intent = new Intent(this, SettingsMainActivity.class);
-	            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	    		 try {
-	                    startActivity(intent);
-	                }
-	             catch (ActivityNotFoundException e){
-	                    Toast.makeText(ListViewActivity.this, "NO Viewer", Toast.LENGTH_SHORT).show();
-	                }
-	            return true;
-	        default:
-            return super.onOptionsItemSelected(item);
-    	}
-    }
 }

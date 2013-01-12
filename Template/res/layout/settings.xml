@@ -26,13 +26,12 @@
 	        
 	        <Button
 	            android:id="@+id/info"
-	            android:onClick="info"
 	            style="@style/iGrowLogoButton">
 	        </Button>
 	        <!--android:text="@string/app_name"-->
 	        <TextView
             style="@style/WindowTitle"
-            android:text="@string/menu_settings"
+            android:text="@string/app_name"
             android:layout_toLeftOf="@+id/info"
             android:layout_toRightOf="@+id/logo"/>
 	    </RelativeLayout>

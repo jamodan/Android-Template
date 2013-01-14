@@ -121,7 +121,7 @@ public class SettingsMainActivity extends ActivityConstants {
 			findViewById(R.id.first_tab).setBackgroundResource(R.drawable.settings_tab_indicator_unselected);
 			findViewById(R.id.second_tab).setBackgroundResource(R.drawable.settings_tab_indicator_unselected);
 			findViewById(R.id.third_tab).setBackgroundResource(R.drawable.settings_tab_indicator_selected);
-			break;
+			break; 
 		}  
 	}
 

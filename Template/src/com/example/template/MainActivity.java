@@ -41,10 +41,4 @@ public class MainActivity extends ActivityConstants {
         	}
         });
     }
-
-    public void iGrowButton(View view)
-    {
-    	iGrowButtonClick(view);
-    }
-    
 }

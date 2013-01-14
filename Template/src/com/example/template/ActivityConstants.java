@@ -55,7 +55,7 @@ public class ActivityConstants extends FragmentActivity
     {
     	switch (item.getItemId()) {
     	case R.id.menu_about:
-    		intent = new Intent(context, super.getClass());
+    		intent = new Intent(this, SettingsMainActivity.class);
     		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
     		intent.putExtra(SettingsMainActivity.TAB, "about");
     		try {

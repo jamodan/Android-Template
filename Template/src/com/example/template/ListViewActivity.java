@@ -10,10 +10,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ListActivity;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -24,9 +22,6 @@ import android.database.SQLException;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AbsListView;
@@ -35,7 +30,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.SimpleCursorAdapter;
@@ -53,8 +47,6 @@ public class ListViewActivity extends ActivityConstants{
 	ArrayList<Integer> listIDS = null;
 	ArrayList<Integer> checkmarkedIDS = null;
 	private TextView windowTitle=null;
-	private Button button_logo=null;
-	private Button button_info=null;
 	private Button button_export=null;
 	private Button button_add=null;
 	private Button button_delete=null;
@@ -124,32 +116,6 @@ public class ListViewActivity extends ActivityConstants{
 				}
 			}
 		});
-		
-		button_logo = (Button)findViewById(R.id.logo);
-        button_logo.setOnClickListener(new OnClickListener(){
-	    	public void onClick(View view){
-	    		// Show the disclaimer
-	    		intent = new Intent(ListViewActivity.this,SettingsMainActivity.class);
-	    	
-	    		 try {
-	                    startActivity(intent);
-	                }
-	             catch (ActivityNotFoundException e){
-	                    Toast.makeText(ListViewActivity.this, "NO Viewer", Toast.LENGTH_SHORT).show();
-	                }
-	    	}
-	    }
-	    );
-        
-        button_info = (Button)findViewById(R.id.info);
-        button_info.setOnClickListener(new OnClickListener(){
-	    	public void onClick(View view){
-	    		// Display additional information for feed analysis values
-	    		Uri uri = Uri.parse( "http://igrow.org" );
-				startActivity( new Intent( Intent.ACTION_VIEW, uri ) );
-	    	}
-	    }
-	    );
         
         button_export = (Button)findViewById(R.id.buttonExport);
         button_export.setOnClickListener(new OnClickListener(){

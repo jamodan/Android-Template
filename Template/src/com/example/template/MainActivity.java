@@ -1,7 +1,8 @@
 /*
  * Created By : Daniel Jamison
- * Copyright (c) 2012 South Dakota State University. All rights reserved.
+ * Copyright (c) 2013 South Dakota State University. All rights reserved.
  */
+
 package com.example.template;
 
 import android.content.ActivityNotFoundException;
@@ -31,6 +32,36 @@ public class MainActivity extends ActivityConstants {
         		// Show the disclaimer
         		intent = new Intent(MainActivity.this,ListViewActivity.class);
         		intent.putExtra(ListViewActivity.ACCESS_TYPE, "Data");
+
+        		try {
+        			startActivity(intent);
+        		}
+        		catch (ActivityNotFoundException e){
+        			Toast.makeText(MainActivity.this, "NO Viewer", Toast.LENGTH_SHORT).show();
+        		}
+        	}
+        });
+        
+        Button button_style2 = (Button)findViewById(R.id.mainStyle2);
+        button_style2.setOnClickListener(new OnClickListener(){
+        	public void onClick(View view){
+        		// Show the disclaimer
+        		intent = new Intent(MainActivity.this,MainUniversalActivity.class);
+
+        		try {
+        			startActivity(intent);
+        		}
+        		catch (ActivityNotFoundException e){
+        			Toast.makeText(MainActivity.this, "NO Viewer", Toast.LENGTH_SHORT).show();
+        		}
+        	}
+        });
+        
+        Button button_style3 = (Button)findViewById(R.id.mainStyle3);
+        button_style3.setOnClickListener(new OnClickListener(){
+        	public void onClick(View view){
+        		// Show the disclaimer
+        		intent = new Intent(MainActivity.this,VRssfeedActivity.class);
 
         		try {
         			startActivity(intent);

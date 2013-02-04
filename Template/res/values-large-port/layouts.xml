@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Created By : Daniel Jamison
+  Copyright (c) 2013 South Dakota State University. All rights reserved.
+ -->
+<resources>
+    <item name="u_main" type="layout">@layout/u_main_one_pane</item>
+    <bool name="has_two_panes">false</bool>
+</resources>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   Created By : Daniel Jamison
-  Copyright (c) 2012 South Dakota State University. All rights reserved.
+  Copyright (c) 2013 South Dakota State University. All rights reserved.
  -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/relativeLayout1"

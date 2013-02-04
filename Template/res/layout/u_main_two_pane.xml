@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Created By : Daniel Jamison
+  Copyright (c) 2013 South Dakota State University. All rights reserved.
+ -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:background="@null">
+    
+    <RelativeLayout
+        android:id="@+id/top_control_bar"
+        style="@style/TopControlBar">
+
+        <Button
+            android:id="@+id/logo"
+            android:clickable="false"
+            style="@style/LogoButton">
+        </Button>
+        
+        <Button
+            android:id="@+id/info"
+            style="@style/iGrowLogoButton">
+        </Button>
+        
+        <TextView
+           android:id="@+id/windowTitle"
+           style="@style/WindowTitle"
+           android:layout_toLeftOf="@+id/info"
+           android:layout_toRightOf="@+id/logo"
+           android:focusableInTouchMode="true"
+           android:focusable="true"/>
+    </RelativeLayout>
+
+    <FrameLayout 
+        android:id="@+id/previous"
+        android:layout_height="fill_parent"
+        android:layout_width="400dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/top_control_bar"/>
+    
+    <FrameLayout 
+        android:id="@+id/current"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent" 
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/previous"
+        android:layout_below="@+id/top_control_bar"/>
+
+</RelativeLayout>

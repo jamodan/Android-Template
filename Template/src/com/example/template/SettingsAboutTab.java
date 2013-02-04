@@ -1,7 +1,8 @@
 /*
  * Created By : Daniel Jamison
- * Copyright (c) 2012 South Dakota State University. All rights reserved.
+ * Copyright (c) 2013 South Dakota State University. All rights reserved.
  */
+
 package com.example.template;
 
 import java.util.regex.Matcher;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   Created By : Daniel Jamison
-  Copyright (c) 2012 South Dakota State University. All rights reserved.
+  Copyright (c) 2013 South Dakota State University. All rights reserved.
  -->
 <resources>
 
@@ -31,7 +31,7 @@
           
           	\n\nFor technical issues and support, contact mobileapps@sdstate.edu.
           
-          	\n\nCopyright 2012 the South Dakota Board of Regents\n\n</string>
+          	\n\nCopyright 2013 the South Dakota Board of Regents\n\n</string>
           
     <string name="credits">Feed Inventory is provided by iGrow and SDSU Extension, which provide practical learning resources to address complex problems of youth and families, communities, agriculture, business, and industry.
 			
@@ -73,6 +73,8 @@
     <string name="rate">Rate this app</string>
     
     <string name="type1">List View</string>
+    <string name="type2">Universal</string>
+    <string name="type3">V Universal</string>
     
     <string name="info1">Row 1</string>
     <string name="info2">Row 2</string>

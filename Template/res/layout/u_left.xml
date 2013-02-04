@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Created By : Daniel Jamison
+  Copyright (c) 2013 South Dakota State University. All rights reserved.
+ -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:background="#000000">
+    
+    <RelativeLayout
+        android:id="@+id/top_control_bar"
+        style="@style/TopControlBar">
+
+        <Button
+            android:id="@+id/logo"
+            android:clickable="false"
+            style="@style/LogoButton">
+        </Button>
+        
+        <Button
+            android:id="@+id/info"
+            style="@style/iGrowLogoButton">
+        </Button>
+        
+        <TextView
+           android:id="@+id/windowTitle"
+           style="@style/WindowTitle"
+           android:layout_toLeftOf="@+id/info"
+           android:layout_toRightOf="@+id/logo"
+           android:focusableInTouchMode="true"
+           android:focusable="true"/>
+    </RelativeLayout>
+
+    <ScrollView 
+	    android:id="@+id/scroll"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/top_control_bar">
+        
+        <RelativeLayout 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+			
+	        <Button
+	            android:id="@+id/mainStyle1"
+	            android:layout_width="100dp"
+	            android:layout_height="50dp"
+	            android:layout_gravity="center_horizontal"
+	            style="@style/Button"
+	            android:text="@string/type1" >
+	        </Button>
+	        
+	        <Button
+	            android:id="@+id/mainStyle2"
+	            android:layout_width="100dp"
+	            android:layout_height="50dp"
+	            android:layout_below="@+id/mainStyle1"
+	            android:layout_gravity="center_horizontal"
+	            style="@style/Button"
+	            android:text="@string/type2" >
+	        </Button>
+	        
+	        <Button
+	            android:id="@+id/mainStyle3"
+	            android:layout_width="100dp"
+	            android:layout_height="50dp"
+	            android:layout_below="@+id/mainStyle2"
+	            android:layout_gravity="center_horizontal"
+	            style="@style/Button"
+	            android:text="@string/type3" >
+	        </Button>
+        </RelativeLayout>
+	</ScrollView>
+
+</RelativeLayout>

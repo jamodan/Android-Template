@@ -5,6 +5,8 @@
 
 package com.example.template;
 
+import com.example.template.Database.DatabaseMain;
+
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.os.Bundle;

@@ -3,7 +3,13 @@
  * Copyright (c) 2013 South Dakota State University. All rights reserved.
  */
 
-package com.example.template;
+package com.example.template.Settings;
+
+import com.example.template.ActivityConstants;
+import com.example.template.R;
+import com.example.template.R.drawable;
+import com.example.template.R.id;
+import com.example.template.R.layout;
 
 import android.content.Intent;
 import android.os.Bundle;

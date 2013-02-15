@@ -33,6 +33,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.template.Database.DatabaseTableData;
 import com.example.template.R.string;
 
 public class ListItemEditActivity extends ActivityConstants {
@@ -95,7 +96,7 @@ public class ListItemEditActivity extends ActivityConstants {
         	setupDataRows();
         	if(updateFlag)
         	{
-        		Cursor c = DatabaseDataTable.get(null, DatabaseDataTable.COLUMN_ID + " = ?", new String[] { "" + ID }, null);
+        		Cursor c = DatabaseTableData.get(null, DatabaseTableData.COLUMN_ID + " = ?", new String[] { "" + ID }, null);
         		if(c != null)
     			{
     				if(c.moveToFirst())
@@ -103,10 +104,10 @@ public class ListItemEditActivity extends ActivityConstants {
     					do
     					{
     						// Populate view with old data for editing
-    						((EditText) data1).setText(c.getString(c.getColumnIndex(DatabaseDataTable.COLUMN_ID)));
-    						((EditText) data2).setText(c.getString(c.getColumnIndex(DatabaseDataTable.COLUMN_NAME)));
-    						((EditText) data3).setText(c.getString(c.getColumnIndex(DatabaseDataTable.COLUMN_VALUE)));
-    						((EditText) data4).setText(c.getString(c.getColumnIndex(DatabaseDataTable.COLUMN_DESCRIPTION)));
+    						((EditText) data1).setText(c.getString(c.getColumnIndex(DatabaseTableData.COLUMN_ID)));
+    						((EditText) data2).setText(c.getString(c.getColumnIndex(DatabaseTableData.COLUMN_NAME)));
+    						((EditText) data3).setText(c.getString(c.getColumnIndex(DatabaseTableData.COLUMN_VALUE)));
+    						((EditText) data4).setText(c.getString(c.getColumnIndex(DatabaseTableData.COLUMN_DESCRIPTION)));
     					}while(c.moveToNext());
     				}
     			}
@@ -341,18 +342,18 @@ public class ListItemEditActivity extends ActivityConstants {
 	{
 		if(updateFlag == false)
 		{
-			DatabaseDataTable.insert(
+			DatabaseTableData.insert(
 					((EditText) data2).getText().toString(), 
 					((EditText) data3).getText().toString(),
 					((EditText) data4).getText().toString());
 		}
 		else
 		{
-			DatabaseDataTable.update(
+			DatabaseTableData.update(
 					((EditText) data2).getText().toString(), 
 					((EditText) data3).getText().toString(),
 					((EditText) data4).getText().toString(),
-					DatabaseDataTable.COLUMN_ID + " = ?",
+					DatabaseTableData.COLUMN_ID + " = ?",
 					new String[] { "" + ID });
 		}
 		

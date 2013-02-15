@@ -46,7 +46,7 @@
         </activity>
         
         <activity android:name="Constants"/>
-        <activity android:name="SettingsMainActivity"/>
+        <activity android:name=".Settings.SettingsMainActivity"/>
         <activity android:name="ListViewActivity"/>
         <activity android:name="ListItemEditActivity"/>
         <activity android:name="MainUniversalActivity"/>

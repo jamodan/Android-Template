@@ -3,7 +3,7 @@
  * Copyright (c) 2013 South Dakota State University. All rights reserved.
  */
 
-package com.example.template;
+package com.example.template.Settings;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;

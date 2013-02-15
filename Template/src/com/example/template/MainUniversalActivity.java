@@ -5,6 +5,9 @@
 
 package com.example.template;
 
+import com.example.template.Settings.SettingsAboutTab;
+import com.example.template.Settings.SettingsDisclaimerTab;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;

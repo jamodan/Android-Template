@@ -3,7 +3,7 @@
  * Copyright (c) 2013 South Dakota State University. All rights reserved.
  */
 
-package com.example.template;
+package com.example.template.Database;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.util.Log;
 
-public class DatabaseDataTable 
+public class DatabaseTableData 
 {
 	// Properties of the table
 	public static final String TABLE_NAME = "Data";
@@ -93,12 +93,12 @@ public class DatabaseDataTable
 		switch (oldVersion){
 		// sample update format only
 			case 1:
-				Log.w(DatabaseOptionsTable.class.getName(), "Upgrading database table " + TABLE_NAME + " from version " + currentVersion + " to " + ++currentVersion);
+				Log.w(DatabaseTableOptions.class.getName(), "Upgrading database table " + TABLE_NAME + " from version " + currentVersion + " to " + ++currentVersion);
 				onCreate(database);
 				
 				// No Break Statement so that the DB will perform all updates required to go from the current version to the newest version
 			case 2: 
-				Log.w(DatabaseOptionsTable.class.getName(), "Upgrading database " + TABLE_NAME + " from version " + currentVersion + " to " + ++currentVersion);
+				Log.w(DatabaseTableOptions.class.getName(), "Upgrading database " + TABLE_NAME + " from version " + currentVersion + " to " + ++currentVersion);
 				onCreate(database);
 				
 				// No Break Statement so that the DB will perform all updates required to go from the current version to the newest version

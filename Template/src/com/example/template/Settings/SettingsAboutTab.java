@@ -3,10 +3,14 @@
  * Copyright (c) 2013 South Dakota State University. All rights reserved.
  */
 
-package com.example.template;
+package com.example.template.Settings;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.example.template.R;
+import com.example.template.R.id;
+import com.example.template.R.layout;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -19,20 +23,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
  
-public class SettingsDisclaimerTab extends Fragment {
+public class SettingsAboutTab extends Fragment {
  
     public static Fragment newInstance(Context context) {
-    	SettingsDisclaimerTab f = new SettingsDisclaimerTab();
- 
+    	SettingsAboutTab f = new SettingsAboutTab();
+        
         return f;
     }
  
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.settings_disclaimer_tab, null);
-        //View root = inflater.inflate(R.layout.disclaimer, container, false);
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.settings_about_tab, null);
+        //View root = inflater.inflate(R.layout.about, container, false);
         
-        TextView disclaimer = (TextView)root.findViewById(R.id.disclaimer);
+        TextView about = (TextView)root.findViewById(R.id.about);
         
         String scheme = "";
         
@@ -56,11 +60,10 @@ public class SettingsDisclaimerTab extends Fragment {
             }
         };
     	
-        Linkify.addLinks(disclaimer, Linkify.EMAIL_ADDRESSES);
-	    Linkify.addLinks(disclaimer, igrowPattern, scheme, newlineFilter, igrowFilter);
-	    Linkify.addLinks(disclaimer, extensionPattern, scheme, newlineFilter, extensionFilter);
+        Linkify.addLinks(about, Linkify.EMAIL_ADDRESSES);
+	    Linkify.addLinks(about, igrowPattern, scheme, newlineFilter, igrowFilter);
+	    Linkify.addLinks(about, extensionPattern, scheme, newlineFilter, extensionFilter);
 	    
         return root;
     }
- 
 }

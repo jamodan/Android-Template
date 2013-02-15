@@ -11,6 +11,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import com.example.template.Database.DatabaseTableData;
+import com.example.template.Database.DatabaseTableOptions;
+
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
@@ -284,7 +287,7 @@ public class ListViewActivity extends ActivityConstants{
 			if (accessType.equals("Options"))
 			{
 				windowTitle.setText("Options");
-				c = (Cursor) DatabaseOptionsTable.get(new String[] { DatabaseOptionsTable.COLUMN_ID, DatabaseOptionsTable.COLUMN_OPTION_NAME }, null, null, null);
+				c = (Cursor) DatabaseTableOptions.get(new String[] { DatabaseTableOptions.COLUMN_ID, DatabaseTableOptions.COLUMN_OPTION_NAME }, null, null, null);
 				listIDS.clear();
 				checkmarkedIDS.clear();
 				allColumns = new String[] {	"_id", "topLeftLabel", "topLeftData" };
@@ -294,7 +297,7 @@ public class ListViewActivity extends ActivityConstants{
 			else if (accessType.equals("Data"))
 			{
 				windowTitle.setText("Data");
-				c = (Cursor) DatabaseDataTable.get(new String[] { DatabaseDataTable.COLUMN_ID, DatabaseDataTable.COLUMN_NAME, DatabaseDataTable.COLUMN_VALUE, DatabaseDataTable.COLUMN_DESCRIPTION }, null, null, null);
+				c = (Cursor) DatabaseTableData.get(new String[] { DatabaseTableData.COLUMN_ID, DatabaseTableData.COLUMN_NAME, DatabaseTableData.COLUMN_VALUE, DatabaseTableData.COLUMN_DESCRIPTION }, null, null, null);
 				listIDS.clear();
 				checkmarkedIDS.clear();
 				allColumns = new String[] {	"_id", "topLeftLabel", "topLeftData", "topRightLabel", "topRightData", "bottomLeftLabel", "bottomLeftData", "bottomRightLabel", "bottomRightData" };
@@ -318,19 +321,19 @@ public class ListViewActivity extends ActivityConstants{
 						if (accessType.equals("Options"))
 						{
 							mCursor.addRow(new Object[] {
-									c.getInt(c.getColumnIndex(DatabaseOptionsTable.COLUMN_ID)), 
-									"Label1", c.getString(c.getColumnIndex(DatabaseOptionsTable.COLUMN_OPTION_NAME))
+									c.getInt(c.getColumnIndex(DatabaseTableOptions.COLUMN_ID)), 
+									"Label1", c.getString(c.getColumnIndex(DatabaseTableOptions.COLUMN_OPTION_NAME))
 							});
 							
 						}
 						else if (accessType.equals("Data"))
 						{
 							mCursor.addRow(new Object[] {
-									c.getInt(c.getColumnIndex(DatabaseDataTable.COLUMN_ID)), 
-									"Name", c.getString(c.getColumnIndex(DatabaseDataTable.COLUMN_NAME)),
-									"Value", c.getString(c.getColumnIndex(DatabaseDataTable.COLUMN_VALUE)),
-									"Description", c.getString(c.getColumnIndex(DatabaseDataTable.COLUMN_DESCRIPTION)),
-									"ID", c.getString(c.getColumnIndex(DatabaseDataTable.COLUMN_ID))
+									c.getInt(c.getColumnIndex(DatabaseTableData.COLUMN_ID)), 
+									"Name", c.getString(c.getColumnIndex(DatabaseTableData.COLUMN_NAME)),
+									"Value", c.getString(c.getColumnIndex(DatabaseTableData.COLUMN_VALUE)),
+									"Description", c.getString(c.getColumnIndex(DatabaseTableData.COLUMN_DESCRIPTION)),
+									"ID", c.getString(c.getColumnIndex(DatabaseTableData.COLUMN_ID))
 							});
 							
 						}
@@ -372,7 +375,7 @@ public class ListViewActivity extends ActivityConstants{
  		{
  			if (accessType.equals("Data"))
  			{
- 				DatabaseDataTable.delete(DatabaseDataTable.COLUMN_ID + " = ?" , new String[] { "" + listIDS.get(checkmarkedIDS.get(index)) });
+ 				DatabaseTableData.delete(DatabaseTableData.COLUMN_ID + " = ?" , new String[] { "" + listIDS.get(checkmarkedIDS.get(index)) });
  			}
  			//db.deleteItem(accessType, listIDS.get(checkmarkedIDS.get(index)));
  			//Toast.makeText(getBaseContext(), "Delete" + checkmarkedIDS.get(index), Toast.LENGTH_LONG).show();

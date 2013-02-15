@@ -3,10 +3,14 @@
  * Copyright (c) 2013 South Dakota State University. All rights reserved.
  */
 
-package com.example.template;
+package com.example.template.Settings;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.example.template.R;
+import com.example.template.R.id;
+import com.example.template.R.layout;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -19,20 +23,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
  
-public class SettingsAboutTab extends Fragment {
+public class SettingsCreditsTab extends Fragment {
  
     public static Fragment newInstance(Context context) {
-    	SettingsAboutTab f = new SettingsAboutTab();
-        
+    	SettingsCreditsTab f = new SettingsCreditsTab();
+ 
         return f;
     }
  
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
-        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.settings_about_tab, null);
-        //View root = inflater.inflate(R.layout.about, container, false);
+        ViewGroup root = (ViewGroup) inflater.inflate(R.layout.settings_credits_tab, null);
+        //View root = inflater.inflate(R.layout.credits, container, false);
         
-        TextView about = (TextView)root.findViewById(R.id.about);
+        TextView credits = (TextView)root.findViewById(R.id.credits);
         
         String scheme = "";
         
@@ -48,7 +52,7 @@ public class SettingsAboutTab extends Fragment {
                 return new String("http://www.iGrow.org/");
             }
         };
-
+        
         Pattern extensionPattern = Pattern.compile("SDSU Extension");
         TransformFilter extensionFilter = new TransformFilter() {
             public final String transformUrl(final Matcher match, String url) {
@@ -56,10 +60,11 @@ public class SettingsAboutTab extends Fragment {
             }
         };
     	
-        Linkify.addLinks(about, Linkify.EMAIL_ADDRESSES);
-	    Linkify.addLinks(about, igrowPattern, scheme, newlineFilter, igrowFilter);
-	    Linkify.addLinks(about, extensionPattern, scheme, newlineFilter, extensionFilter);
+        Linkify.addLinks(credits, Linkify.EMAIL_ADDRESSES);
+	    Linkify.addLinks(credits, igrowPattern, scheme, newlineFilter, igrowFilter);
+	    Linkify.addLinks(credits, extensionPattern, scheme, newlineFilter, extensionFilter);
 	    
         return root;
     }
+ 
 }

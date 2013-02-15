@@ -3,9 +3,10 @@
  * Copyright (c) 2013 South Dakota State University. All rights reserved.
  */
 
-package com.example.template;
+package com.example.template.Database;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -29,14 +30,14 @@ public class DatabaseMain
 		@Override
 		public void onCreate(SQLiteDatabase db) 
 		{
-			DatabaseOptionsTable.onCreate(db);
-			DatabaseDataTable.onCreate(db);
+			DatabaseTableOptions.onCreate(db);
+			DatabaseTableData.onCreate(db);
 		}
 	
 		@Override
 		public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-			DatabaseOptionsTable.onUpgrade(db, oldVersion, newVersion);
-			DatabaseDataTable.onUpgrade(db, oldVersion, newVersion);
+			DatabaseTableOptions.onUpgrade(db, oldVersion, newVersion);
+			DatabaseTableData.onUpgrade(db, oldVersion, newVersion);
 		}
 	}
 	
@@ -54,5 +55,15 @@ public class DatabaseMain
 
 	public void close() {
 		dbHelper.close();
+	}
+	
+	public Cursor Select(String sqlStatement)
+	{
+		Cursor c = database.rawQuery(sqlStatement, null);
+		if(c.getCount()==0)
+		{
+			return null;
+		}
+		return c;
 	}
 }

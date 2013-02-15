@@ -3,7 +3,7 @@
  * Copyright (c) 2013 South Dakota State University. All rights reserved.
  */
 
-package com.example.template;
+package com.example.template.Database;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.util.Log;
 
-public class DatabaseOptionsTable 
+public class DatabaseTableOptions 
 {
 	// Properties of the table
 	public static final String TABLE_NAME = "Options";
@@ -54,18 +54,19 @@ public class DatabaseOptionsTable
 	
 	// Initial/Default values
 	private static final String[] DEFAULT_VALUES = {
+		"('Last DB Update', 'Jan 1 2000 1:29PM', 'Holds the date of the last database update check')",
 		"('Hide disclaimer', 'false', 'Shows the disclaimer on the main screen when the app is launched')"
 	};
 	
 	//##########################################################################################
 	// Table Specific Methods
 	
-	public static void insert(Item item)
+	public static void insert(String optionName, String value, String description)
 	{
 		DatabaseMain.database.execSQL(INSERT_ROW
-				+ "('" 		+ item.optionName
-				+ "', '" 	+ item.value 
-				+ "', '" 	+ item.description 
+				+ "('" 		+ optionName
+				+ "', '" 	+ value 
+				+ "', '" 	+ description 
 				+ "')");
 	}
 
@@ -86,12 +87,12 @@ public class DatabaseOptionsTable
 
 	@return the number of rows affected 
 	 */
-	public static int update(Item values, String selection, String[] selectionArgs)
+	public static int update(String optionName, String value, String description, String selection, String[] selectionArgs)
 	{
 		ContentValues args = new ContentValues();
-		args.put(COLUMN_OPTION_NAME, values.optionName);
-		args.put(COLUMN_VALUE, values.value);
-		args.put(COLUMN_DESCRIPTION, values.description);
+		args.put(COLUMN_OPTION_NAME, optionName);
+		args.put(COLUMN_VALUE, value);
+		args.put(COLUMN_DESCRIPTION, description);
 		
 		return DatabaseMain.database.update(TABLE_NAME, args, selection, selectionArgs);
 	}
@@ -103,12 +104,12 @@ public class DatabaseOptionsTable
 		switch (oldVersion){
 		// sample update format only
 			case 1:
-				Log.w(DatabaseOptionsTable.class.getName(), "Upgrading database table " + TABLE_NAME + " from version " + currentVersion + " to " + ++currentVersion);
+				Log.w(DatabaseTableOptions.class.getName(), "Upgrading database table " + TABLE_NAME + " from version " + currentVersion + " to " + ++currentVersion);
 				onCreate(database);
 				
 				// No Break Statement so that the DB will perform all updates required to go from the current version to the newest version
 			case 2: 
-				Log.w(DatabaseOptionsTable.class.getName(), "Upgrading database " + TABLE_NAME + " from version " + currentVersion + " to " + ++currentVersion);
+				Log.w(DatabaseTableOptions.class.getName(), "Upgrading database " + TABLE_NAME + " from version " + currentVersion + " to " + ++currentVersion);
 				onCreate(database);
 				
 				// No Break Statement so that the DB will perform all updates required to go from the current version to the newest version

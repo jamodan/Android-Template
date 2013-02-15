@@ -15,20 +15,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.ImageView;
 import android.widget.Toast;
+
+import com.example.template.Settings.SettingsMainActivity;
 
 public class ActivityConstants extends FragmentActivity
 {
 	Intent intent;
 	Context context = null;
-	
-	public void iGrowButtonClick(View view){
-		// Display additional information for feed analysis values
-		Uri uri = Uri.parse( "http://igrow.org" );
-		startActivity( new Intent( Intent.ACTION_VIEW, uri ) );
-	}
 	
 	@SuppressLint("NewApi")
 	@Override
@@ -36,17 +30,6 @@ public class ActivityConstants extends FragmentActivity
     {
     	MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
-        if (android.os.Build.VERSION.SDK_INT >= 11)
-        {
-	        ImageView iGrowLogo = (ImageView) menu.findItem(R.id.menu_igrow).getActionView();
-	        iGrowLogo.setOnClickListener(new OnClickListener(){
-		    	public void onClick(View view){
-		    		// Display additional information for feed analysis values
-		    		iGrowButtonClick(view);
-		    	}
-		    }
-		    );
-        }
         return true;
     }
     
@@ -62,7 +45,7 @@ public class ActivityConstants extends FragmentActivity
     			startActivity(intent);
     		}
     		catch (ActivityNotFoundException e){
-    			Toast.makeText(context, "NO Viewer", Toast.LENGTH_SHORT).show();
+    			Toast.makeText(this, "NO Viewer", Toast.LENGTH_SHORT).show();
     		}
     		return true;
     	case R.id.menu_disclaimer:
@@ -73,7 +56,7 @@ public class ActivityConstants extends FragmentActivity
     			startActivity(intent);
     		}
     		catch (ActivityNotFoundException e){
-    			Toast.makeText(context, "NO Viewer", Toast.LENGTH_SHORT).show();
+    			Toast.makeText(this, "NO Viewer", Toast.LENGTH_SHORT).show();
     		}
     		return true;
     	case R.id.menu_credits:
@@ -84,8 +67,14 @@ public class ActivityConstants extends FragmentActivity
     			startActivity(intent);
     		}
     		catch (ActivityNotFoundException e){
-    			Toast.makeText(context, "NO Viewer", Toast.LENGTH_SHORT).show();
+    			Toast.makeText(this, "NO Viewer", Toast.LENGTH_SHORT).show();
     		}
+    		return true;
+    	case R.id.menu_rate:
+    		rate(super.getCurrentFocus());
+    		return true;
+    	case R.id.menu_other_apps:
+    		otherApps(super.getCurrentFocus());
     		return true;
     	default:
     		return super.onOptionsItemSelected(item);

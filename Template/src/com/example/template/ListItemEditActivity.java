@@ -39,7 +39,7 @@ import com.example.template.R.string;
 public class ListItemEditActivity extends ActivityConstants {
 	public static final String KEY_ID = "ID";
 	public int ID = 0;
-	public String accessType = "";
+	public int accessType = 0;
 	
 	private TextView windowTitle = null;
 	private Button button_logo = null;
@@ -77,7 +77,7 @@ public class ListItemEditActivity extends ActivityConstants {
         extras = getIntent().getExtras();
         if(extras!= null)
         {
-        	ID = Integer.parseInt(extras.getString(KEY_ID));
+        	ID = extras.getInt(KEY_ID);
         }
         
         // Make sure the passed inventoryID is a valid number then get its data, set the save flag, 
@@ -90,7 +90,7 @@ public class ListItemEditActivity extends ActivityConstants {
          
         accessType = ListViewActivity.accessType;
            
-        if (accessType.equals("Data"))
+        if (accessType == ListViewActivity.LIST_BY_DATA)
         {
         	windowTitle.setText("Data");
         	setupDataRows();
@@ -124,7 +124,7 @@ public class ListItemEditActivity extends ActivityConstants {
         button_done.setOnClickListener(new OnClickListener(){
 	    	public void onClick(View view){
 	    		// Save the feed record and return to the main screen
-	    		if (accessType.equals("Data"))
+	    		if (accessType == ListViewActivity.LIST_BY_DATA)
 	            {
 	            	saveData();
 	            }

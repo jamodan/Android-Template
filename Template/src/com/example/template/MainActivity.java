@@ -32,14 +32,14 @@ public class MainActivity extends ActivityConstants {
         button_style1.setOnClickListener(new OnClickListener(){
         	public void onClick(View view){
         		// Show the disclaimer
-        		intent = new Intent(MainActivity.this,ListViewActivity.class);
-        		intent.putExtra(ListViewActivity.ACCESS_TYPE, "Data");
+        		intent = new Intent(getApplicationContext(),ListViewActivity.class);
+        		intent.putExtra(ListViewActivity.ACCESS_TYPE, ListViewActivity.LIST_BY_DATA);
 
         		try {
         			startActivity(intent);
         		}
         		catch (ActivityNotFoundException e){
-        			Toast.makeText(MainActivity.this, "NO Viewer", Toast.LENGTH_SHORT).show();
+        			Toast.makeText(getApplicationContext(), "NO Viewer", Toast.LENGTH_SHORT).show();
         		}
         	}
         });
@@ -48,13 +48,13 @@ public class MainActivity extends ActivityConstants {
         button_style2.setOnClickListener(new OnClickListener(){
         	public void onClick(View view){
         		// Show the disclaimer
-        		intent = new Intent(MainActivity.this,MainUniversalActivity.class);
+        		intent = new Intent(getApplicationContext(),MainUniversalActivity.class);
 
         		try {
         			startActivity(intent);
         		}
         		catch (ActivityNotFoundException e){
-        			Toast.makeText(MainActivity.this, "NO Viewer", Toast.LENGTH_SHORT).show();
+        			Toast.makeText(getApplicationContext(), "NO Viewer", Toast.LENGTH_SHORT).show();
         		}
         	}
         });
@@ -63,13 +63,13 @@ public class MainActivity extends ActivityConstants {
         button_style3.setOnClickListener(new OnClickListener(){
         	public void onClick(View view){
         		// Show the disclaimer
-        		intent = new Intent(MainActivity.this,VRssfeedActivity.class);
+        		intent = new Intent(getApplicationContext(),VRssfeedActivity.class);
 
         		try {
         			startActivity(intent);
         		}
         		catch (ActivityNotFoundException e){
-        			Toast.makeText(MainActivity.this, "NO Viewer", Toast.LENGTH_SHORT).show();
+        			Toast.makeText(getApplicationContext(), "NO Viewer", Toast.LENGTH_SHORT).show();
         		}
         	}
         });

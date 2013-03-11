@@ -40,11 +40,15 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ListViewActivity extends ActivityConstants{
-	
-	
+public class ListViewActivity extends ActivityConstants
+{
 	public static final String ACCESS_TYPE = "accessType";
-	public static String accessType = "";
+	public static int accessType = 0;
+	
+	public static final int LIST_BY_DATA = 1;
+	public static final int LIST_BY_OPTION = 2;
+	public static final int LIST_BY_BLA = 3;
+	
 	SimpleCursorAdapter adapter = null;
 	private MatrixCursor mCursor = null;
 	
@@ -74,7 +78,7 @@ public class ListViewActivity extends ActivityConstants{
         extras = getIntent().getExtras();
         if(extras!= null)
         {
-        	accessType = extras.getString(ACCESS_TYPE);
+        	accessType = extras.getInt(ACCESS_TYPE);
         }  
         
         listIDS = new ArrayList<Integer>();
@@ -90,7 +94,7 @@ public class ListViewActivity extends ActivityConstants{
 		{
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) 
 			{
-				if (accessType.equals("Data"))
+				if (accessType == LIST_BY_DATA)
 				{
 					selectedID = listIDS.get(position);
 					  	
@@ -106,7 +110,7 @@ public class ListViewActivity extends ActivityConstants{
 			public void onScroll(AbsListView view, int firstVisibleItem,
 					int visibleItemCount, int totalItemCount) {
 				// Change color based on positive/negative number
-				if (accessType.equals("Bla1"))
+				if (accessType == LIST_BY_BLA)
 				{
 					setTotalBackgroundColor();
 				}
@@ -114,7 +118,7 @@ public class ListViewActivity extends ActivityConstants{
 
 			public void onScrollStateChanged(AbsListView view, int scrollState) {
 				// Change color based on positive/negative number
-				if (accessType.equals("Bla1"))
+				if (accessType == LIST_BY_BLA)
 				{
 					setTotalBackgroundColor();
 				}
@@ -173,7 +177,7 @@ public class ListViewActivity extends ActivityConstants{
 	    });
         
         // Special button setups for each list type
-        if (accessType.equals("bla"))
+        if (accessType == LIST_BY_BLA)
 		{
         	button_delete.setVisibility(View.INVISIBLE);
         	button_add.setVisibility(View.GONE);
@@ -183,7 +187,7 @@ public class ListViewActivity extends ActivityConstants{
     public void export()
     { 	
     	String combinedString = "";
-    	if (accessType.equals("Bla1"))
+    	if (accessType == LIST_BY_BLA)
 		{
     		String columnName = "\"column1\",\"column2\",\"column3\"\n";
     		combinedString = columnName + columnData;
@@ -195,7 +199,7 @@ public class ListViewActivity extends ActivityConstants{
     	{
     		File dir = new File (root.getAbsolutePath() + "/ExportData");
     	    dir.mkdirs();
-    	    if (accessType.equals("Bla1"))
+    	    if (accessType == LIST_BY_BLA)
 			{
     	    	file = new File(dir, "ExportStuff-Bla1.csv");
 			}
@@ -228,7 +232,7 @@ public class ListViewActivity extends ActivityConstants{
     	u1  =   Uri.fromFile(file);
 
     	Intent sendIntent = new Intent(Intent.ACTION_SEND);
-    	if (accessType.equals("Bla1"))
+    	if (accessType == LIST_BY_BLA)
 		{
     		sendIntent.putExtra(Intent.EXTRA_SUBJECT, "Your Exported Data: Bla1");
     		sendIntent.putExtra(Intent.EXTRA_TEXT, "Hello,\n\nPlease find the attached comma-separated values (CSV) file. This file can be opened by any common spreadsheet application (such as Microsoft Excel) and it contains the data you exported from " + getString(R.string.app_name) + ".");
@@ -284,7 +288,7 @@ public class ListViewActivity extends ActivityConstants{
 		
 		try
 		{
-			if (accessType.equals("Options"))
+			if (accessType == LIST_BY_OPTION)
 			{
 				windowTitle.setText("Options");
 				c = (Cursor) DatabaseTableOptions.get(new String[] { DatabaseTableOptions.COLUMN_ID, DatabaseTableOptions.COLUMN_OPTION_NAME }, null, null, null);
@@ -294,7 +298,7 @@ public class ListViewActivity extends ActivityConstants{
 		    	dataColumns = new String[] {	"topLeftLabel", "topLeftData" };
 		    	layoutIds = new int[] { R.id.leftTopLable, R.id.leftTopData };
 			}
-			else if (accessType.equals("Data"))
+			else if (accessType == LIST_BY_DATA)
 			{
 				windowTitle.setText("Data");
 				c = (Cursor) DatabaseTableData.get(new String[] { DatabaseTableData.COLUMN_ID, DatabaseTableData.COLUMN_NAME, DatabaseTableData.COLUMN_VALUE, DatabaseTableData.COLUMN_DESCRIPTION }, null, null, null);
@@ -318,7 +322,7 @@ public class ListViewActivity extends ActivityConstants{
 					do
 					{
 						listIDS.add(c.getInt(c.getColumnIndex("_id")));
-						if (accessType.equals("Options"))
+						if (accessType == LIST_BY_OPTION)
 						{
 							mCursor.addRow(new Object[] {
 									c.getInt(c.getColumnIndex(DatabaseTableOptions.COLUMN_ID)), 
@@ -326,7 +330,7 @@ public class ListViewActivity extends ActivityConstants{
 							});
 							
 						}
-						else if (accessType.equals("Data"))
+						else if (accessType == LIST_BY_DATA)
 						{
 							mCursor.addRow(new Object[] {
 									c.getInt(c.getColumnIndex(DatabaseTableData.COLUMN_ID)), 
@@ -353,11 +357,11 @@ public class ListViewActivity extends ActivityConstants{
 			}
 		}
 		
-		if (accessType.equals("Options"))
+		if (accessType == LIST_BY_OPTION)
 		{
 			adapter = new SimpleCursorAdapter(this, R.layout.list_item, mCursor, dataColumns, layoutIds);
 		}
-		else if (accessType.equals("Data"))
+		else if (accessType == LIST_BY_DATA)
 		{
 			adapter = new SimpleCursorAdapter(this, R.layout.list_item, mCursor, dataColumns, layoutIds);
 		}
@@ -373,7 +377,7 @@ public class ListViewActivity extends ActivityConstants{
  		// Step through the checked items and delete them
  		for (int index = 0; index < count; index++) 
  		{
- 			if (accessType.equals("Data"))
+ 			if (accessType == LIST_BY_DATA)
  			{
  				DatabaseTableData.delete(DatabaseTableData.COLUMN_ID + " = ?" , new String[] { "" + listIDS.get(checkmarkedIDS.get(index)) });
  			}

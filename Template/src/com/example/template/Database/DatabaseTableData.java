@@ -153,6 +153,7 @@ public class DatabaseTableData
 	public static Float getFloat(String[] returnColumns, String selection, String[] selectionArgs, String groupBy)
 	{
 	    Cursor c = get(returnColumns, selection, selectionArgs, groupBy);
+	    c.moveToFirst();
 	    if(c.getCount() == 1 && c.getColumnCount() == 1)
 	    {
 	    	return c.getFloat(0);
@@ -186,6 +187,7 @@ public class DatabaseTableData
 	public static int getInt(String[] returnColumns, String selection, String[] selectionArgs, String groupBy)
 	{
 	    Cursor c = get(returnColumns, selection, selectionArgs, groupBy);
+	    c.moveToFirst();
 	    if(c.getCount() == 1 && c.getColumnCount() == 1)
 	    {
 	    	return c.getInt(0);
@@ -219,6 +221,7 @@ public class DatabaseTableData
 	public static String getString(String[] returnColumns, String selection, String[] selectionArgs, String groupBy)
 	{
 	    Cursor c = get(returnColumns, selection, selectionArgs, groupBy);
+	    c.moveToFirst();
 	    if(c.getCount() == 1 && c.getColumnCount() == 1)
 	    {
 	    	return c.getString(0);
